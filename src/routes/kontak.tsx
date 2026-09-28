@@ -125,7 +125,7 @@ function KontakPage() {
           <div className="bg-white p-8 rounded-sm border border-forest/10 shadow-lg">
             <h2 className="text-2xl font-serif font-bold text-forest mb-6">Tinggalkan Pesan</h2>
             
-            <form action={import.meta.env.VITE_FORM_ENDPOINT || '#'} method="POST" className="space-y-4">
+            <form action={import.meta.env.VITE_FORM_ENDPOINT || '/submit-form.php'} method="POST" className="space-y-4">
               <input type="hidden" name="form_type" value="contact" />
               
               {/* Honeypot field anti-spam */}

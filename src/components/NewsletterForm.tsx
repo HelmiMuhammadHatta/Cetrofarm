@@ -1,5 +1,5 @@
 export function NewsletterForm() {
-  const formEndpoint = import.meta.env.VITE_FORM_ENDPOINT || '#'
+  const formEndpoint = import.meta.env.VITE_FORM_ENDPOINT || '/submit-form.php'
 
   return (
     <div className="max-w-md mx-auto">

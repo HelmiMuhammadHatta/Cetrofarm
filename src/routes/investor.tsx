@@ -402,7 +402,7 @@ Pesan: ${message}`
           </div>
           
           <div className="bg-white/5 p-8 rounded-sm border border-cream/10 shadow-2xl">
-            <form action={import.meta.env.VITE_FORM_ENDPOINT || '#'} method="POST" className="space-y-4">
+            <form action={import.meta.env.VITE_FORM_ENDPOINT || '/submit-form.php'} method="POST" className="space-y-4">
               <input type="hidden" name="form_type" value="investor" />
               
               {/* Honeypot field for anti-spam */}

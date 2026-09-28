@@ -104,7 +104,7 @@ export function PdfDownloadModal({ isOpen, onClose, pdfUrl = "/docs/CetroFarm-Co
             </div>
           ) : (
             <form 
-              action={import.meta.env.VITE_FORM_ENDPOINT || '#'} 
+              action={import.meta.env.VITE_FORM_ENDPOINT || '/submit-form.php'} 
               method="POST" 
               onSubmit={() => {
                 setTimeout(() => { window.open(pdfUrl, '_blank'); onClose(); }, 500);
