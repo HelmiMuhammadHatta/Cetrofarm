@@ -50,7 +50,9 @@ export function CertificationCard({ cert }: CertificationCardProps) {
         <span className="block text-[10px] text-forest/60 uppercase tracking-widest font-sans font-bold mb-1">
           Nomor Registrasi Resmi
         </span>
-        <span className="text-forest font-bold select-all break-all">{cert.certNumber}</span>
+        <span className="text-forest font-bold select-all break-all">
+          {(cert as any).verified ? cert.certNumber : '[Dalam Proses Verifikasi]'}
+        </span>
       </div>
 
       <div className="flex items-center justify-between pt-2 border-t border-forest/10 text-xs">

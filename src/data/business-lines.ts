@@ -52,7 +52,7 @@ export const businessLines: BusinessLine[] = [
     id: "daging-ayam",
     title: "Protein Hewani (Ayam Kampung Sehat)",
     shortTitle: "Protein Hewani",
-    desc: "Pengembangan peternakan ayam kampung binaan dengan pakan herbal alami bebas residu antibiotik. Menghasilkan karkas dan potongan higienis standar konsumsi keluarga.",
+    desc: "Pengembangan peternakan ayam kampung binaan dengan pakan herbal alami bebas residu antibiotik. Menghasilkan karkas dan potongan higienis standar premium untuk industri HORECA dan ritel.",
     status: "Berjalan",
     capacity: "1.200 Ekor / Siklus",
     capacityNumber: 1200,

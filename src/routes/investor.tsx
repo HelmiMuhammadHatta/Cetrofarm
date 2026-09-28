@@ -402,104 +402,84 @@ Pesan: ${message}`
           </div>
           
           <div className="bg-white/5 p-8 rounded-sm border border-cream/10 shadow-2xl">
-            {submitStatus === 'success' ? (
-              <div className="bg-wheat/20 p-6 rounded-sm text-center border border-wheat/30">
-                <CheckCircle2 size={40} className="text-wheat mx-auto mb-3" />
-                <h3 className="font-serif font-bold text-wheat text-xl mb-2">Jadwal Pertemuan Diajukan</h3>
-                <p className="text-cream/90 text-sm mb-6 leading-relaxed">
-                  Terima kasih. Tim Investor Relations kami akan segera mengonfirmasi ketersediaan jadwal melalui email yang Anda daftarkan.
-                </p>
-                <button 
-                  onClick={() => setSubmitStatus('idle')} 
-                  className="px-6 py-2.5 bg-wheat text-forest rounded-sm font-bold text-xs hover:bg-white transition-colors"
-                >
-                  Ajukan Pertemuan Lain
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Honeypot field for anti-spam */}
+            <form action={import.meta.env.VITE_FORM_ENDPOINT || '#'} method="POST" className="space-y-4">
+              <input type="hidden" name="form_type" value="investor" />
+              
+              {/* Honeypot field for anti-spam */}
+              <input 
+                type="text" 
+                name="_gotcha" 
+                className="hidden" 
+                tabIndex={-1} 
+                autoComplete="off" 
+              />
+
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider mb-1 text-cream">Nama Lengkap & Jabatan *</label>
                 <input 
                   type="text" 
-                  name="botcheck" 
-                  value={honeypot} 
-                  onChange={(e) => setHoneypot(e.target.value)} 
-                  className="hidden" 
-                  tabIndex={-1} 
+                  name="name" 
+                  required 
+                  className="w-full px-4 py-3 rounded-sm border border-cream/20 bg-transparent text-cream focus:outline-none focus:border-wheat text-sm" 
+                  placeholder="Misal: Budi Santoso (Managing Partner)" 
                 />
-
+              </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider mb-1 text-cream">Nama Lengkap & Jabatan *</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider mb-1 text-cream">Email Kerja *</label>
                   <input 
-                    type="text" 
-                    name="name" 
+                    type="email" 
+                    name="email" 
                     required 
                     className="w-full px-4 py-3 rounded-sm border border-cream/20 bg-transparent text-cream focus:outline-none focus:border-wheat text-sm" 
-                    placeholder="Misal: Budi Santoso (Managing Partner)" 
+                    placeholder="budi@fund.com"
                   />
                 </div>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider mb-1 text-cream">Email Kerja *</label>
-                    <input 
-                      type="email" 
-                      name="email" 
-                      required 
-                      className="w-full px-4 py-3 rounded-sm border border-cream/20 bg-transparent text-cream focus:outline-none focus:border-wheat text-sm" 
-                      placeholder="budi@fund.com"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider mb-1 text-cream">Institusi / Perusahaan VC</label>
-                    <input 
-                      type="text" 
-                      name="company" 
-                      className="w-full px-4 py-3 rounded-sm border border-cream/20 bg-transparent text-cream focus:outline-none focus:border-wheat text-sm" 
-                      placeholder="Misal: Nusantara Capital"
-                    />
-                  </div>
-                </div>
-
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider mb-1 text-cream">Preferensi Tanggal & Waktu *</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider mb-1 text-cream">Institusi / Perusahaan VC</label>
                   <input 
                     type="text" 
-                    name="meeting_date" 
-                    required 
+                    name="company" 
                     className="w-full px-4 py-3 rounded-sm border border-cream/20 bg-transparent text-cream focus:outline-none focus:border-wheat text-sm" 
-                    placeholder="Misal: Rabu, 18 September 2026 jam 14:00 WIB (Online Zoom)" 
+                    placeholder="Misal: Nusantara Capital"
                   />
                 </div>
+              </div>
 
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider mb-1 text-cream">Topik Diskusi / Pertanyaan *</label>
-                  <textarea 
-                    name="message" 
-                    required 
-                    rows={3} 
-                    className="w-full px-4 py-3 rounded-sm border border-cream/20 bg-transparent text-cream focus:outline-none focus:border-wheat text-sm" 
-                    placeholder="Tuliskan fokus diskusi investor (misal: inquiry ronde Seed/Seri A, kunjungan site cold storage Semarang)..."
-                  ></textarea>
-                </div>
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider mb-1 text-cream">Preferensi Tanggal & Waktu *</label>
+                <input 
+                  type="text" 
+                  name="meeting_date" 
+                  required 
+                  className="w-full px-4 py-3 rounded-sm border border-cream/20 bg-transparent text-cream focus:outline-none focus:border-wheat text-sm" 
+                  placeholder="Misal: Rabu, 18 September 2026 jam 14:00 WIB (Online Zoom)" 
+                />
+              </div>
 
-                {submitStatus === 'error' && (
-                  <p className="text-red-300 text-xs font-bold bg-red-900/30 p-2.5 rounded border border-red-500/30">{errorMessage}</p>
-                )}
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider mb-1 text-cream">Topik Diskusi / Pertanyaan *</label>
+                <textarea 
+                  name="message" 
+                  required 
+                  rows={3} 
+                  className="w-full px-4 py-3 rounded-sm border border-cream/20 bg-transparent text-cream focus:outline-none focus:border-wheat text-sm" 
+                  placeholder="Tuliskan fokus diskusi investor (misal: inquiry ronde Seed/Seri A, kunjungan site cold storage Semarang)..."
+                ></textarea>
+              </div>
 
-                <button 
-                  type="submit" 
-                  disabled={submitStatus === 'loading'} 
-                  className="w-full py-4 mt-4 bg-wheat text-forest font-bold rounded-sm hover:bg-white transition-colors disabled:opacity-50 text-sm tracking-wide shadow-lg flex items-center justify-center gap-2"
-                >
-                  {submitStatus === 'loading' ? 'MENGIRIM PERMINTAAN...' : (
-                    <>
-                      <Calendar size={18} /> KIRIM PERMINTAAN MEETING
-                    </>
-                  )}
-                </button>
-              </form>
-            )}
+              <div className="text-[11px] text-cream/70 leading-relaxed">
+                Dengan mengklik kirim, Anda menyetujui <a href="/kebijakan-privasi" target="_blank" className="underline font-bold text-wheat hover:text-white">Kebijakan Privasi</a> Cetrofarm.
+              </div>
+
+              <button 
+                type="submit" 
+                className="w-full py-4 mt-4 bg-wheat text-forest font-bold rounded-sm hover:bg-white transition-colors text-sm tracking-wide shadow-lg flex items-center justify-center gap-2"
+              >
+                <Calendar size={18} /> KIRIM PERMINTAAN MEETING
+              </button>
+            </form>
           </div>
         </div>
       </section>

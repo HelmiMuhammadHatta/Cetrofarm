@@ -16,7 +16,7 @@ export const metrics = {
 export const valueProps = [
   {
     title: "Traceability",
-    desc: "Melacak perjalanan pangan Anda dari bibit, lahan, hingga meja makan dengan transparansi penuh."
+    desc: "Melacak perjalanan pangan dari bibit, lahan, hingga pusat distribusi dengan transparansi penuh."
   },
   {
     title: "Standar Mutu",
@@ -32,7 +32,7 @@ export const steps = [
   { num: "01", title: "Pendampingan Petani", desc: "Edukasi budidaya dan suplai sarana pertanian terpadu." },
   { num: "02", title: "Panen & Standarisasi", desc: "Panen pada tingkat kematangan optimal dan quality control." },
   { num: "03", title: "Distribusi Terjaga", desc: "Sistem logistik rantai dingin meminimalkan kerusakan pangan." },
-  { num: "04", title: "Sampai ke Keluarga", desc: "Bahan pangan segar nan bernutrisi tiba di meja Anda." }
+  { num: "04", title: "Suplai Mitra Terjaga", desc: "Bahan pangan segar nan bernutrisi tiba di gudang dan outlet mitra Anda tepat waktu." }
 ];
 
 export const testimonials = [

@@ -103,13 +103,20 @@ export function PdfDownloadModal({ isOpen, onClose, pdfUrl = "/docs/CetroFarm-Co
               <p className="text-xs text-forest/70">Terima kasih atas minat Anda pada CetroFarm.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form 
+              action={import.meta.env.VITE_FORM_ENDPOINT || '#'} 
+              method="POST" 
+              onSubmit={() => {
+                setTimeout(() => { window.open(pdfUrl, '_blank'); onClose(); }, 500);
+              }}
+              className="space-y-4"
+            >
+              <input type="hidden" name="form_type" value="investor" />
+              
               {/* Anti-spam honeypot */}
               <input 
                 type="text" 
-                name="website_url" 
-                value={honeypot} 
-                onChange={(e) => setHoneypot(e.target.value)} 
+                name="_gotcha" 
                 className="hidden" 
                 tabIndex={-1} 
                 autoComplete="off" 
@@ -121,7 +128,7 @@ export function PdfDownloadModal({ isOpen, onClose, pdfUrl = "/docs/CetroFarm-Co
                   type="text" 
                   name="name"
                   required
-                  className="w-full px-4 py-3 rounded-sm border border-forest/20 focus:outline-none focus:border-forest bg-cream/30 text-sm" 
+                  className="w-full px-4 py-3 rounded-sm border border-forest/20 focus:outline-none focus:border-forest bg-cream/30 text-sm text-forest" 
                   placeholder="Misal: Budi Santoso"
                 />
               </div>
@@ -132,7 +139,7 @@ export function PdfDownloadModal({ isOpen, onClose, pdfUrl = "/docs/CetroFarm-Co
                   type="email" 
                   name="email"
                   required
-                  className="w-full px-4 py-3 rounded-sm border border-forest/20 focus:outline-none focus:border-forest bg-cream/30 text-sm" 
+                  className="w-full px-4 py-3 rounded-sm border border-forest/20 focus:outline-none focus:border-forest bg-cream/30 text-sm text-forest" 
                   placeholder="nama@perusahaan.com"
                 />
               </div>
@@ -142,25 +149,20 @@ export function PdfDownloadModal({ isOpen, onClose, pdfUrl = "/docs/CetroFarm-Co
                 <input 
                   type="text" 
                   name="company"
-                  className="w-full px-4 py-3 rounded-sm border border-forest/20 focus:outline-none focus:border-forest bg-cream/30 text-sm" 
+                  className="w-full px-4 py-3 rounded-sm border border-forest/20 focus:outline-none focus:border-forest bg-cream/30 text-sm text-forest" 
                   placeholder="Misal: VC Partner / PT Mandiri"
                 />
               </div>
 
-              {submitStatus === 'error' && (
-                <p className="text-red-600 text-xs font-bold bg-red-50 p-2 rounded">{errorMessage}</p>
-              )}
+              <div className="text-[11px] text-forest/70 leading-relaxed">
+                Dengan mengklik unduh, Anda menyetujui <a href="/kebijakan-privasi" target="_blank" className="underline font-bold text-forest hover:text-wheat">Kebijakan Privasi</a> Cetrofarm.
+              </div>
 
               <button 
                 type="submit" 
-                disabled={submitStatus === 'loading'}
-                className="w-full py-3.5 bg-forest text-cream font-bold rounded-sm hover:bg-forest/90 transition-colors disabled:opacity-50 mt-4 text-sm flex items-center justify-center gap-2"
+                className="w-full py-3.5 bg-forest text-cream font-bold rounded-sm hover:bg-forest/90 transition-colors mt-4 text-sm flex items-center justify-center gap-2"
               >
-                {submitStatus === 'loading' ? 'Memproses...' : (
-                  <>
-                    <Download size={16} /> Unduh PDF Sekarang
-                  </>
-                )}
+                <Download size={16} /> Unduh PDF Sekarang
               </button>
 
               <div className="flex items-center gap-1 justify-center text-[11px] text-forest/60 pt-2">

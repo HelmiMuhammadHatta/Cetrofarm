@@ -58,7 +58,9 @@ function LegalitasPage() {
                   {cert.issuer}
                 </span>
                 <h3 className="text-lg font-serif font-bold text-forest mb-2">{cert.label}</h3>
-                <p className="text-xs text-forest/80 mb-2 font-mono">No: {cert.certNumber}</p>
+                <p className="text-xs text-forest/80 mb-2 font-mono">
+                  No: {cert.verified ? cert.certNumber : '[Dalam Proses Verifikasi]'}
+                </p>
                 <p className="text-xs text-forest/60 leading-relaxed mb-4">{cert.desc}</p>
                 <div className="flex justify-between items-center text-xs font-bold">
                   <span className="text-forest/50">Status: {cert.verified ? 'Terverifikasi' : 'Pending Verifikasi'}</span>

@@ -125,98 +125,84 @@ function KontakPage() {
           <div className="bg-white p-8 rounded-sm border border-forest/10 shadow-lg">
             <h2 className="text-2xl font-serif font-bold text-forest mb-6">Tinggalkan Pesan</h2>
             
-            {submitStatus === 'success' ? (
-              <div className="bg-forest/10 p-6 rounded-sm text-center border border-forest/20">
-                <CheckCircle2 size={36} className="text-forest mx-auto mb-2" />
-                <h3 className="font-bold text-forest text-lg mb-2">Pesan Terkirim!</h3>
-                <p className="text-forest/80 text-xs mb-4">Terima kasih telah menghubungi Cetrofarm. Tim kami akan merespons dalam 1x24 jam.</p>
-                <button 
-                  onClick={() => setSubmitStatus('idle')}
-                  className="px-6 py-2 bg-forest text-cream rounded-sm font-bold text-xs hover:bg-forest/90"
-                >
-                  Kirim Pesan Lain
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Honeypot field */}
+            <form action={import.meta.env.VITE_FORM_ENDPOINT || '#'} method="POST" className="space-y-4">
+              <input type="hidden" name="form_type" value="contact" />
+              
+              {/* Honeypot field anti-spam */}
+              <input 
+                type="text" 
+                name="_gotcha" 
+                className="hidden" 
+                tabIndex={-1} 
+                autoComplete="off"
+              />
+
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider mb-1 text-forest">Nama Lengkap *</label>
                 <input 
                   type="text" 
-                  name="user_check" 
-                  value={honeypot} 
-                  onChange={(e) => setHoneypot(e.target.value)} 
-                  className="hidden" 
-                  tabIndex={-1} 
+                  name="name"
+                  required
+                  className="w-full px-4 py-3 rounded-sm border border-forest/20 focus:outline-none focus:border-forest bg-cream/30 text-sm text-forest" 
                 />
-
+              </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider mb-1 text-forest">Nama Lengkap *</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider mb-1 text-forest">Email *</label>
                   <input 
-                    type="text" 
-                    name="name"
+                    type="email" 
+                    name="email"
                     required
-                    className="w-full px-4 py-3 rounded-sm border border-forest/20 focus:outline-none focus:border-forest bg-cream/30 text-sm" 
+                    className="w-full px-4 py-3 rounded-sm border border-forest/20 focus:outline-none focus:border-forest bg-cream/30 text-sm text-forest" 
                   />
                 </div>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider mb-1 text-forest">Email *</label>
-                    <input 
-                      type="email" 
-                      name="email"
-                      required
-                      className="w-full px-4 py-3 rounded-sm border border-forest/20 focus:outline-none focus:border-forest bg-cream/30 text-sm" 
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider mb-1 text-forest">No. Telepon</label>
-                    <input 
-                      type="tel" 
-                      name="phone"
-                      className="w-full px-4 py-3 rounded-sm border border-forest/20 focus:outline-none focus:border-forest bg-cream/30 text-sm" 
-                    />
-                  </div>
-                </div>
-
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider mb-1 text-forest">Kategori Pertanyaan *</label>
-                  <select 
-                    name="category"
-                    required
-                    className="w-full px-4 py-3 rounded-sm border border-forest/20 focus:outline-none focus:border-forest bg-cream/30 text-sm"
-                  >
-                    <option value="">Pilih Kategori</option>
-                    <option value="Kerjasama B2B">Kerjasama B2B (HORECA / Ritel)</option>
-                    <option value="Suplai Petani">Kemitraan Petani</option>
-                    <option value="Investor">Peluang Investasi</option>
-                    <option value="Lainnya">Lainnya</option>
-                  </select>
+                  <label className="block text-xs font-bold uppercase tracking-wider mb-1 text-forest">No. Telepon / WhatsApp</label>
+                  <input 
+                    type="tel" 
+                    name="phone"
+                    className="w-full px-4 py-3 rounded-sm border border-forest/20 focus:outline-none focus:border-forest bg-cream/30 text-sm text-forest" 
+                  />
                 </div>
+              </div>
 
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider mb-1 text-forest">Pesan Anda *</label>
-                  <textarea 
-                    name="message"
-                    required
-                    rows={4} 
-                    className="w-full px-4 py-3 rounded-sm border border-forest/20 focus:outline-none focus:border-forest bg-cream/30 text-sm"
-                  ></textarea>
-                </div>
-
-                {submitStatus === 'error' && (
-                  <p className="text-red-600 text-xs font-bold bg-red-50 p-2 rounded">{errorMessage}</p>
-                )}
-
-                <button 
-                  type="submit" 
-                  disabled={submitStatus === 'loading'}
-                  className="w-full py-3.5 bg-forest text-cream font-bold rounded-sm hover:bg-forest/90 transition-colors disabled:opacity-50 text-sm"
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider mb-1 text-forest">Kategori Pertanyaan *</label>
+                <select 
+                  name="category"
+                  required
+                  className="w-full px-4 py-3 rounded-sm border border-forest/20 focus:outline-none focus:border-forest bg-cream/30 text-sm text-forest"
                 >
-                  {submitStatus === 'loading' ? 'Mengirim...' : 'KIRIM PESAN'}
-                </button>
-              </form>
-            )}
+                  <option value="">Pilih Kategori</option>
+                  <option value="[B2B] Penawaran B2B (HORECA / Ritel)">[B2B] Penawaran B2B (HORECA / Ritel)</option>
+                  <option value="Kemitraan Petani">Kemitraan Petani</option>
+                  <option value="Peluang Investasi">Peluang Investasi</option>
+                  <option value="Lainnya">Lainnya</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider mb-1 text-forest">Pesan Anda *</label>
+                <textarea 
+                  name="message"
+                  required
+                  rows={4} 
+                  className="w-full px-4 py-3 rounded-sm border border-forest/20 focus:outline-none focus:border-forest bg-cream/30 text-sm text-forest"
+                ></textarea>
+              </div>
+
+              <div className="text-[11px] text-forest/70 leading-relaxed">
+                Dengan mengklik kirim, Anda menyetujui <a href="/kebijakan-privasi" target="_blank" className="underline font-bold text-forest hover:text-wheat">Kebijakan Privasi</a> PT. Cetro Tama Indonesia.
+              </div>
+
+              <button 
+                type="submit" 
+                className="w-full py-3.5 bg-forest text-cream font-bold rounded-sm hover:bg-forest/90 transition-colors text-sm"
+              >
+                KIRIM PESAN
+              </button>
+            </form>
           </div>
         </div>
 

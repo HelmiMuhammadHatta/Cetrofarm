@@ -250,7 +250,7 @@ function Footer() {
           </a>
           <p className="text-cream/80 text-sm leading-relaxed mb-6">
             bringing nature inside.<br />
-            Merawat rantai pasok pangan dari petani binaan sampai meja keluarga Anda, sejak 2018.
+            Merawat rantai pasok pangan dari 210+ petani binaan hingga ke jaringan ritel & mitra bisnis Anda, sejak 2018.
           </p>
           <div className="flex flex-col gap-3">
             <span className="flex items-center gap-2 text-sm text-cream/90 font-bold">
