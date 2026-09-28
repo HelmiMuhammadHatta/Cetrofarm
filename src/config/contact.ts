@@ -1,15 +1,22 @@
 export const CONTACT = {
-  // TODO: Konfirmasi apakah nomor WA ini sudah benar
+  // TODO: Verifikasi akhir nomor WA resmi (Situs asli: +62 85 800 500 111 / 6285800500111; Prototipe sebelumnya: 6285860300111)
   whatsapp: {
-    number: "6285860300111",
-    display: "+62 858-6030-0111",
+    number: "6285800500111",
+    display: "+62 85 800 500 111",
   },
-  // TODO: Konfirmasi telepon kantor 5138 atau 5130 yang benar
+  // TODO: Verifikasi akhir telepon kantor (Situs asli: (024) 6933 5130; Prototipe sebelumnya: (024) 6933 5138)
   officePhone: {
-    number: "02469335138",
-    display: "(024) 6933 5138",
+    number: "02469335130",
+    display: "(024) 6933 5130",
   },
-  email: "customerrelation@cetrofarm.com", // or should we use placeholder? The data had this.
-  address: "Jl. Setro Raya, Desa Gondoriyo, Kec. Bergas, Kab. Semarang",
-  repOffice: "Deruzzi Space, Jl. Sukajadi No. 25, Bandung"
+  email: {
+    public: "customerrelation@cetrofarm.com",
+    investor: "investor@cetrofarm.com",
+    b2b: "customerrelation@cetrofarm.com",
+  },
+  companyName: "PT. Cetro Tama Indonesia (Cetrofarm)",
+  nib: "9120212080575",
+  address: "Jl. Setro Raya, Desa Gondoriyo, Kec. Bergas, Kab. Semarang 50552",
+  repOffice: "Deruzzi Space, Jl. Sukajadi No. 25, Bandung",
+  retailShopUrl: "https://shop.cetrofarm.com"
 };

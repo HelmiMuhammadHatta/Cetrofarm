@@ -3,8 +3,24 @@ import { getArticles } from '../../server/articles'
 
 export const APIRoute = createAPIFileRoute('/api/sitemap.xml')({
   GET: async ({ request }) => {
-    const baseUrl = 'https://cetrofarm.com'
-    const staticRoutes = ['', '/tentang', '/ekosistem', '/produk', '/investor', '/kontak', '/faq']
+    const baseUrl = process.env.VITE_SITE_URL || 'https://cetrofarm.com'
+    const staticRoutes = [
+      '',
+      '/tentang',
+      '/manajemen',
+      '/legalitas',
+      '/ekosistem',
+      '/produk',
+      '/penawaran',
+      '/investor',
+      '/artikel',
+      '/testimoni',
+      '/faq',
+      '/kontak',
+      '/kebijakan-privasi',
+      '/syarat-ketentuan',
+      '/keberlanjutan'
+    ]
     
     let articles: any[] = []
     try {

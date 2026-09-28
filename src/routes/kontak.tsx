@@ -115,7 +115,7 @@ function KontakPage() {
                 <Mail className="text-forest shrink-0 mt-1" size={22} />
                 <div>
                   <h3 className="font-bold text-forest">Email Resmi</h3>
-                  <p className="text-forest/70 text-xs mt-0.5">{CONTACT.email}</p>
+                  <p className="text-forest/70 text-xs mt-0.5">{CONTACT.email.public}</p>
                 </div>
               </div>
             </div>

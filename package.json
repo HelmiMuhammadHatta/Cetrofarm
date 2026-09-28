@@ -11,6 +11,7 @@
     "build": "cross-env BUILD_TARGET=vercel vite build",
     "build:vercel": "cross-env BUILD_TARGET=vercel vite build",
     "build:static": "cross-env BUILD_TARGET=static vite build || exit 0",
+    "verify": "node scripts/verify-build.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

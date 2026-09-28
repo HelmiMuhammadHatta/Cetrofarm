@@ -25,7 +25,7 @@ function PrivacyComponent() {
         <p className="text-sm text-forest mb-2"><strong>PT. Cetro Tama Indonesia (Cetrofarm)</strong></p>
         <p className="text-xs text-forest/80 mb-1">NIB: 9120212080575</p>
         <p className="text-xs text-forest/80 mb-1">{CONTACT.address}</p>
-        <p className="text-xs text-forest/80">Email: {CONTACT.email}</p>
+        <p className="text-xs text-forest/80">Email: {CONTACT.email.public}</p>
       </div>
     </div>
   )

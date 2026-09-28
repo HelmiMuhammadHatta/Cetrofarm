@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { metrics, valueProps, steps, testimonials, articles } from '../data/content'
 import { businessLines } from '../data/company'
 import { CONTACT } from '../config/contact'
+import { getVisibleCertifications, getVisiblePartners } from '../data/credentials'
 import { TractionChart } from '../components/TractionChart'
 import { NewsletterForm } from '../components/NewsletterForm'
 import { CountUp } from '../components/CountUp'
@@ -107,16 +108,16 @@ function Homepage() {
               Cetrofarm merawat rantai pasok pangan dari 210+ petani binaan langsung ke pasar B2B. Memberikan kepastian pasokan bagi offtaker sejak 2018.
             </p>
             <div className="flex flex-wrap gap-4 mb-16 relative z-20">
-              <a 
-                href="/tentang" 
-                onClick={() => trackEvent('cta_click', { button: 'Lihat Profil' })} 
+              <a
+                href="/tentang"
+                onClick={() => trackEvent('cta_click', { button: 'Lihat Profil' })}
                 className="px-6 py-3.5 bg-wheat text-forest font-bold rounded-sm hover:bg-white hover:shadow-lg transition-all flex items-center gap-2 text-sm"
               >
                 Lihat Profil Perusahaan <ArrowRight size={18} />
               </a>
-              <a 
-                href="/investor" 
-                onClick={() => trackEvent('cta_click', { button: 'Peluang Investasi' })} 
+              <a
+                href="/investor"
+                onClick={() => trackEvent('cta_click', { button: 'Peluang Investasi' })}
                 className="px-6 py-3.5 bg-transparent border-2 border-cream/80 text-cream font-bold rounded-sm hover:bg-cream/10 transition-all text-sm"
               >
                 Peluang Investasi
@@ -159,23 +160,29 @@ function Homepage() {
       </section>
 
       {/* 2. Trust Bar */}
-      <section className="bg-cream py-8 border-b border-forest/10 overflow-hidden">
-        <div className="container mx-auto px-4 mb-4">
-          <p className="text-center text-forest/70 text-xs font-bold uppercase tracking-widest">
-            Dipercaya oleh mitra strategis & sertifikasi mutu resmi
-          </p>
-        </div>
-        <div className="relative flex overflow-x-hidden group">
-          <div className="animate-marquee whitespace-nowrap flex items-center gap-12 md:gap-24 opacity-80 transition-all">
-            <span className="font-serif text-xl font-bold flex items-center gap-2 text-forest mx-4"><ShieldCheck size={22} className="text-forest" /> Sertifikat Organik SNI 6729</span>
-            <span className="font-serif text-xl font-bold flex items-center gap-2 text-forest mx-4"><ShieldCheck size={22} className="text-forest" /> Sertifikat Halal MUI</span>
-            <span className="font-serif text-xl font-bold flex items-center gap-2 text-forest mx-4"><ShieldCheck size={22} className="text-forest" /> NKV Peternakan Jateng</span>
-            <span className="font-serif text-xl font-bold text-forest mx-4">Mitra Ritel Modern Superindo</span>
-            <span className="font-serif text-xl font-bold text-forest mx-4">Mitra AEON Mall</span>
-            <span className="font-serif text-xl font-bold text-forest mx-4">Mitra Hotel & HORECA</span>
+      {(getVisibleCertifications().length > 0 || getVisiblePartners().length > 0) && (
+        <section className="bg-cream py-8 border-b border-forest/10 overflow-hidden">
+          <div className="container mx-auto px-4 mb-4">
+            <p className="text-center text-forest/70 text-xs font-bold uppercase tracking-widest">
+              Dipercaya oleh mitra strategis & sertifikasi mutu resmi
+            </p>
           </div>
-        </div>
-      </section>
+          <div className="relative flex overflow-x-hidden group">
+            <div className="animate-marquee whitespace-nowrap flex items-center gap-12 md:gap-24 opacity-80 transition-all">
+              {getVisibleCertifications().map(cert => (
+                <span key={cert.id} className="font-serif text-xl font-bold flex items-center gap-2 text-forest mx-4">
+                  <ShieldCheck size={22} className="text-forest" /> {cert.label}
+                </span>
+              ))}
+              {getVisiblePartners().map((partner, idx) => (
+                <span key={idx} className="font-serif text-xl font-bold text-forest mx-4">
+                  Mitra {partner.label}
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* 3. Value Proposition */}
       <motion.section
@@ -229,13 +236,13 @@ function Homepage() {
             </div>
             <div className="lg:w-1/2">
               <div className="rounded-sm overflow-hidden shadow-2xl border border-cream/10">
-                <img 
-                  src="/assets/ilustrasi-rantai-pasok.webp" 
-                  alt="Diagram Alur Ekosistem Rantai Pasok Cetrofarm" 
-                  loading="lazy" 
+                <img
+                  src="/assets/ilustrasi-rantai-pasok.webp"
+                  alt="Diagram Alur Ekosistem Rantai Pasok Cetrofarm"
+                  loading="lazy"
                   width={800}
                   height={500}
-                  className="w-full h-auto object-cover" 
+                  className="w-full h-auto object-cover"
                 />
               </div>
             </div>
@@ -263,10 +270,10 @@ function Homepage() {
             {businessLines.map(p => (
               <div key={p.id} className="group block bg-white rounded-sm overflow-hidden border border-forest/10 hover:shadow-xl transition-all flex flex-col">
                 <div className="h-48 overflow-hidden relative">
-                  <img 
-                    src={p.image} 
-                    alt={`${p.title} Cetrofarm`} 
-                    loading="lazy" 
+                  <img
+                    src={p.image}
+                    alt={`${p.title} Cetrofarm`}
+                    loading="lazy"
                     width={400}
                     height={250}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -282,12 +289,12 @@ function Homepage() {
                   <span className="text-[11px] font-bold uppercase text-forest/60 mb-2">{p.capacity}</span>
                   <h3 className="text-xl font-serif font-bold text-forest mb-2">{p.title}</h3>
                   <p className="text-forest/70 text-xs leading-relaxed mb-6 flex-grow">{p.desc}</p>
-                  
+
                   <div className="pt-4 border-t border-forest/10 flex justify-between items-center text-xs font-bold">
                     <a href={`/produk#${p.id}`} className="text-forest hover:underline">Detail Lini</a>
-                    <a 
-                      href={`https://wa.me/${CONTACT.whatsapp.number}?text=${encodeURIComponent(`Halo Cetrofarm, saya tertarik meminta penawaran B2B untuk ${p.title}.`)}`} 
-                      target="_blank" 
+                    <a
+                      href={`https://wa.me/${CONTACT.whatsapp.number}?text=${encodeURIComponent(`Halo Cetrofarm, saya tertarik meminta penawaran B2B untuk ${p.title}.`)}`}
+                      target="_blank"
                       rel="noreferrer"
                       className="px-3 py-1.5 bg-forest text-cream rounded hover:bg-forest/90 transition-colors"
                     >
@@ -352,13 +359,13 @@ function Homepage() {
             {articles.map((art, idx) => (
               <a href={`/artikel/${art.slug}`} key={idx} className="group block bg-white rounded-sm border border-forest/10 overflow-hidden shadow-sm hover:shadow-md transition-all">
                 <div className="overflow-hidden h-48">
-                  <img 
-                    src={art.image} 
-                    alt={art.title} 
-                    loading="lazy" 
+                  <img
+                    src={art.image}
+                    alt={art.title}
+                    loading="lazy"
                     width={400}
                     height={250}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
                 <div className="p-5">
@@ -384,9 +391,9 @@ function Homepage() {
       </motion.section>
 
       {/* Download PDF Modal */}
-      <PdfDownloadModal 
-        isOpen={isPdfModalOpen} 
-        onClose={() => setIsPdfModalOpen(false)} 
+      <PdfDownloadModal
+        isOpen={isPdfModalOpen}
+        onClose={() => setIsPdfModalOpen(false)}
         pdfUrl="/docs/CetroFarm-Company-Profile.pdf"
       />
     </div>

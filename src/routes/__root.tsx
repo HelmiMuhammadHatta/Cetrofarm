@@ -139,8 +139,16 @@ function Navbar() {
         </nav>
         
         <div className="flex items-center gap-4">
-          <a href="/kontak" className="hidden lg:inline-flex px-5 py-2.5 bg-cream text-forest rounded-sm hover:bg-wheat transition-all font-bold text-sm">
-            Hubungi Kami
+          <a 
+            href={CONTACT.retailShopUrl} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="hidden sm:inline-flex px-3.5 py-1.5 border border-cream/40 text-cream hover:bg-wheat hover:text-forest rounded-sm transition-all font-bold text-xs"
+          >
+            Belanja Ritel 🛒
+          </a>
+          <a href="/penawaran" className="hidden lg:inline-flex px-4 py-2 bg-cream text-forest rounded-sm hover:bg-wheat transition-all font-bold text-xs">
+            Penawaran (RFQ)
           </a>
           {/* <button 
             onClick={() => setLanguage(language === 'id' ? 'en' : 'id')}
@@ -267,7 +275,7 @@ function Footer() {
             <p>{CONTACT.address}</p>
             <p>{CONTACT.officePhone.display}</p>
             <p>{CONTACT.whatsapp.display}</p>
-            <p>{CONTACT.email}</p>
+            <p>{CONTACT.email.public}</p>
           </address>
         </div>
         <div>
@@ -276,6 +284,8 @@ function Footer() {
             <a href="/tentang" className="hover:text-white transition-colors">Tentang Kami</a>
             <a href="/produk" className="hover:text-white transition-colors">Katalog Produk</a>
             <a href="/investor" className="hover:text-white transition-colors">Peluang Investasi</a>
+            <a href="/penawaran" className="hover:text-white transition-colors font-bold text-wheat">Permintaan Penawaran (RFQ)</a>
+            <a href={CONTACT.retailShopUrl} target="_blank" rel="noreferrer" className="hover:text-white transition-colors">Toko Ritel (shop.cetrofarm.com)</a>
             <a href="/faq" className="hover:text-white transition-colors">Pusat Bantuan (FAQ)</a>
             <a href="/kontak" className="hover:text-white transition-colors">Hubungi Kami</a>
           </ul>

@@ -19,6 +19,7 @@ import { Route as KebijakanPrivasiRouteImport } from './routes/kebijakan-privasi
 import { Route as KontakRouteImport } from './routes/kontak'
 import { Route as LegalitasRouteImport } from './routes/legalitas'
 import { Route as ManajemenRouteImport } from './routes/manajemen'
+import { Route as PenawaranRouteImport } from './routes/penawaran'
 import { Route as ProdukRouteImport } from './routes/produk'
 import { Route as SyaratKetentuanRouteImport } from './routes/syarat-ketentuan'
 import { Route as TentangRouteImport } from './routes/tentang'
@@ -77,6 +78,11 @@ const ManajemenRoute = ManajemenRouteImport.update({
   path: '/manajemen',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PenawaranRoute = PenawaranRouteImport.update({
+  id: '/penawaran',
+  path: '/penawaran',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProdukRoute = ProdukRouteImport.update({
   id: '/produk',
   path: '/produk',
@@ -124,6 +130,7 @@ export interface FileRoutesByFullPath {
   '/kontak': typeof KontakRoute
   '/legalitas': typeof LegalitasRoute
   '/manajemen': typeof ManajemenRoute
+  '/penawaran': typeof PenawaranRoute
   '/produk': typeof ProdukRoute
   '/syarat-ketentuan': typeof SyaratKetentuanRoute
   '/tentang': typeof TentangRoute
@@ -143,6 +150,7 @@ export interface FileRoutesByTo {
   '/kontak': typeof KontakRoute
   '/legalitas': typeof LegalitasRoute
   '/manajemen': typeof ManajemenRoute
+  '/penawaran': typeof PenawaranRoute
   '/produk': typeof ProdukRoute
   '/syarat-ketentuan': typeof SyaratKetentuanRoute
   '/tentang': typeof TentangRoute
@@ -163,6 +171,7 @@ export interface FileRoutesById {
   '/kontak': typeof KontakRoute
   '/legalitas': typeof LegalitasRoute
   '/manajemen': typeof ManajemenRoute
+  '/penawaran': typeof PenawaranRoute
   '/produk': typeof ProdukRoute
   '/syarat-ketentuan': typeof SyaratKetentuanRoute
   '/tentang': typeof TentangRoute
@@ -184,6 +193,7 @@ export interface FileRouteTypes {
     | '/kontak'
     | '/legalitas'
     | '/manajemen'
+    | '/penawaran'
     | '/produk'
     | '/syarat-ketentuan'
     | '/tentang'
@@ -203,6 +213,7 @@ export interface FileRouteTypes {
     | '/kontak'
     | '/legalitas'
     | '/manajemen'
+    | '/penawaran'
     | '/produk'
     | '/syarat-ketentuan'
     | '/tentang'
@@ -222,6 +233,7 @@ export interface FileRouteTypes {
     | '/kontak'
     | '/legalitas'
     | '/manajemen'
+    | '/penawaran'
     | '/produk'
     | '/syarat-ketentuan'
     | '/tentang'
@@ -242,6 +254,7 @@ export interface RootRouteChildren {
   KontakRoute: typeof KontakRoute
   LegalitasRoute: typeof LegalitasRoute
   ManajemenRoute: typeof ManajemenRoute
+  PenawaranRoute: typeof PenawaranRoute
   ProdukRoute: typeof ProdukRoute
   SyaratKetentuanRoute: typeof SyaratKetentuanRoute
   TentangRoute: typeof TentangRoute
@@ -323,6 +336,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ManajemenRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/penawaran': {
+      id: '/penawaran'
+      path: '/penawaran'
+      fullPath: '/penawaran'
+      preLoaderRoute: typeof PenawaranRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/produk': {
       id: '/produk'
       path: '/produk'
@@ -386,6 +406,7 @@ const rootRouteChildren: RootRouteChildren = {
   KontakRoute: KontakRoute,
   LegalitasRoute: LegalitasRoute,
   ManajemenRoute: ManajemenRoute,
+  PenawaranRoute: PenawaranRoute,
   ProdukRoute: ProdukRoute,
   SyaratKetentuanRoute: SyaratKetentuanRoute,
   TentangRoute: TentangRoute,

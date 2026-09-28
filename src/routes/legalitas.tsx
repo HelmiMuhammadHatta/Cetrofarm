@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { certifications } from '../data/credentials'
+import { getVisibleCertifications } from '../data/credentials'
 
 export const Route = createFileRoute('/legalitas')({
   component: LegalitasPage,
@@ -46,30 +46,36 @@ function LegalitasPage() {
         </div>
 
         <h2 className="text-2xl font-serif font-bold text-forest mb-6">Sertifikasi Standar Mutu</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {certifications.map(cert => (
-            <div key={cert.id} className="bg-white rounded-sm shadow-md border border-forest/10 overflow-hidden flex flex-col">
-              <div className="h-40 bg-forest/5 flex items-center justify-center border-b border-forest/10 relative">
-                 <span className="text-forest/40 font-bold text-xs text-center px-4 z-10">[ISI: Sertifikat {cert.label}]</span>
-                 <img src="/assets/placeholder-document.webp" alt="" className="absolute inset-0 w-full h-full object-cover opacity-10" />
-              </div>
-              <div className="p-6">
-                <span className="inline-block px-2 py-1 bg-forest/10 text-forest text-[10px] font-bold uppercase tracking-wider rounded mb-3">
-                  {cert.issuer}
-                </span>
-                <h3 className="text-lg font-serif font-bold text-forest mb-2">{cert.label}</h3>
-                <p className="text-xs text-forest/80 mb-2 font-mono">
-                  No: {cert.verified ? cert.certNumber : '[Dalam Proses Verifikasi]'}
-                </p>
-                <p className="text-xs text-forest/60 leading-relaxed mb-4">{cert.desc}</p>
-                <div className="flex justify-between items-center text-xs font-bold">
-                  <span className="text-forest/50">Status: {cert.verified ? 'Terverifikasi' : 'Pending Verifikasi'}</span>
-                  <span className="text-wheat">Hingga {cert.validUntil}</span>
+        {getVisibleCertifications().length === 0 ? (
+          <div className="bg-white p-8 rounded-sm shadow-sm border border-forest/10 text-center text-forest/70 text-sm">
+            [Dokumen sertifikasi resmi sedang dalam tahap finalisasi verifikasi oleh tim legal]
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {getVisibleCertifications().map(cert => (
+              <div key={cert.id} className="bg-white rounded-sm shadow-md border border-forest/10 overflow-hidden flex flex-col">
+                <div className="h-40 bg-forest/5 flex items-center justify-center border-b border-forest/10 relative">
+                   <span className="text-forest/40 font-bold text-xs text-center px-4 z-10">[ISI: Sertifikat {cert.label}]</span>
+                   <img src="/assets/placeholder-document.webp" alt="" className="absolute inset-0 w-full h-full object-cover opacity-10" />
+                </div>
+                <div className="p-6">
+                  <span className="inline-block px-2 py-1 bg-forest/10 text-forest text-[10px] font-bold uppercase tracking-wider rounded mb-3">
+                    {cert.issuer}
+                  </span>
+                  <h3 className="text-lg font-serif font-bold text-forest mb-2">{cert.label}</h3>
+                  <p className="text-xs text-forest/80 mb-2 font-mono">
+                    No: {cert.verified ? cert.certNumber : '[Dalam Proses Verifikasi]'}
+                  </p>
+                  <p className="text-xs text-forest/60 leading-relaxed mb-4">{cert.desc}</p>
+                  <div className="flex justify-between items-center text-xs font-bold">
+                    <span className="text-forest/50">Status: {cert.verified ? 'Terverifikasi' : 'Pending Verifikasi'}</span>
+                    <span className="text-wheat">Hingga {cert.validUntil}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )

@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { motion } from 'framer-motion'
 import { Search, PackageCheck, Truck, ShieldCheck, ArrowRight, PhoneCall } from 'lucide-react'
 import { businessLines } from '../data/company'
-import { certifications } from '../data/credentials'
+import { getVisibleCertifications } from '../data/credentials'
 import { CONTACT } from '../config/contact'
 import { CertificationCard } from '../components/CertificationCard'
 
@@ -147,19 +147,21 @@ function ProdukPage() {
       </motion.section>
 
       {/* 4. Certifications Section (Icon & Text based) */}
-      <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUpVariant} className="container mx-auto px-4 max-w-5xl">
-        <div className="text-center mb-12">
-          <span className="text-xs font-bold text-forest uppercase tracking-widest block mb-2">Jaminan Mutu Resmi</span>
-          <h2 className="text-3xl font-serif font-bold text-forest mb-4">Sertifikasi & Kepatuhan Standar</h2>
-          <div className="w-24 h-1 bg-wheat mx-auto rounded-full"></div>
-        </div>
+      {getVisibleCertifications().length > 0 && (
+        <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUpVariant} className="container mx-auto px-4 max-w-5xl">
+          <div className="text-center mb-12">
+            <span className="text-xs font-bold text-forest uppercase tracking-widest block mb-2">Jaminan Mutu Resmi</span>
+            <h2 className="text-3xl font-serif font-bold text-forest mb-4">Sertifikasi & Kepatuhan Standar</h2>
+            <div className="w-24 h-1 bg-wheat mx-auto rounded-full"></div>
+          </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {certifications.map((cert) => (
-            <CertificationCard key={cert.id} cert={cert} />
-          ))}
-        </div>
-      </motion.section>
+          <div className="grid md:grid-cols-3 gap-6">
+            {getVisibleCertifications().map((cert) => (
+              <CertificationCard key={cert.id} cert={cert} />
+            ))}
+          </div>
+        </motion.section>
+      )}
     </div>
   )
 }

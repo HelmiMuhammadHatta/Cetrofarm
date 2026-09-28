@@ -1,0 +1,18 @@
+# Cetrofarm WordPress Legacy 301 Redirects & Rewrite Rules
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 301 Redirects dari Struktur URL WordPress Lama (/home/...) ke Rute Baru
+  RewriteRule ^home/about/?$ /tentang [R=301,L]
+  RewriteRule ^home/article/?$ /artikel [R=301,L]
+  RewriteRule ^home/testimonials/?$ /testimoni [R=301,L]
+  RewriteRule ^home/contact-us/?$ /kontak [R=301,L]
+  RewriteRule ^home/privacy-policy/?$ /kebijakan-privasi [R=301,L]
+  RewriteRule ^home/en/(.*)$ /$1 [R=301,L]
+
+  # Pemetaan Artikel Lama ke Artikel Baru Relevan
+  RewriteRule ^home/produk-sayuran-sumber-serat-alami/?$ /artikel/agrikultur-terintegrasi-era-modern [R=301,L]
+  RewriteRule ^home/sumber-protein-hewani/?$ /artikel/ekosistem-beras-berkualitas-pemberdayaan-petani [R=301,L]
+  RewriteRule ^home/bahan-pokok/?$ /artikel/traceability-rantai-pasok-standar-b2b [R=301,L]
+</IfModule>
