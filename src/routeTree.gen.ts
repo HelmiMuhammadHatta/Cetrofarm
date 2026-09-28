@@ -17,6 +17,8 @@ import { Route as InvestorRouteImport } from './routes/investor'
 import { Route as KeberlanjutanRouteImport } from './routes/keberlanjutan'
 import { Route as KebijakanPrivasiRouteImport } from './routes/kebijakan-privasi'
 import { Route as KontakRouteImport } from './routes/kontak'
+import { Route as LegalitasRouteImport } from './routes/legalitas'
+import { Route as ManajemenRouteImport } from './routes/manajemen'
 import { Route as ProdukRouteImport } from './routes/produk'
 import { Route as SyaratKetentuanRouteImport } from './routes/syarat-ketentuan'
 import { Route as TentangRouteImport } from './routes/tentang'
@@ -65,6 +67,16 @@ const KontakRoute = KontakRouteImport.update({
   path: '/kontak',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LegalitasRoute = LegalitasRouteImport.update({
+  id: '/legalitas',
+  path: '/legalitas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ManajemenRoute = ManajemenRouteImport.update({
+  id: '/manajemen',
+  path: '/manajemen',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProdukRoute = ProdukRouteImport.update({
   id: '/produk',
   path: '/produk',
@@ -110,6 +122,8 @@ export interface FileRoutesByFullPath {
   '/keberlanjutan': typeof KeberlanjutanRoute
   '/kebijakan-privasi': typeof KebijakanPrivasiRoute
   '/kontak': typeof KontakRoute
+  '/legalitas': typeof LegalitasRoute
+  '/manajemen': typeof ManajemenRoute
   '/produk': typeof ProdukRoute
   '/syarat-ketentuan': typeof SyaratKetentuanRoute
   '/tentang': typeof TentangRoute
@@ -127,6 +141,8 @@ export interface FileRoutesByTo {
   '/keberlanjutan': typeof KeberlanjutanRoute
   '/kebijakan-privasi': typeof KebijakanPrivasiRoute
   '/kontak': typeof KontakRoute
+  '/legalitas': typeof LegalitasRoute
+  '/manajemen': typeof ManajemenRoute
   '/produk': typeof ProdukRoute
   '/syarat-ketentuan': typeof SyaratKetentuanRoute
   '/tentang': typeof TentangRoute
@@ -145,6 +161,8 @@ export interface FileRoutesById {
   '/keberlanjutan': typeof KeberlanjutanRoute
   '/kebijakan-privasi': typeof KebijakanPrivasiRoute
   '/kontak': typeof KontakRoute
+  '/legalitas': typeof LegalitasRoute
+  '/manajemen': typeof ManajemenRoute
   '/produk': typeof ProdukRoute
   '/syarat-ketentuan': typeof SyaratKetentuanRoute
   '/tentang': typeof TentangRoute
@@ -164,6 +182,8 @@ export interface FileRouteTypes {
     | '/keberlanjutan'
     | '/kebijakan-privasi'
     | '/kontak'
+    | '/legalitas'
+    | '/manajemen'
     | '/produk'
     | '/syarat-ketentuan'
     | '/tentang'
@@ -181,6 +201,8 @@ export interface FileRouteTypes {
     | '/keberlanjutan'
     | '/kebijakan-privasi'
     | '/kontak'
+    | '/legalitas'
+    | '/manajemen'
     | '/produk'
     | '/syarat-ketentuan'
     | '/tentang'
@@ -198,6 +220,8 @@ export interface FileRouteTypes {
     | '/keberlanjutan'
     | '/kebijakan-privasi'
     | '/kontak'
+    | '/legalitas'
+    | '/manajemen'
     | '/produk'
     | '/syarat-ketentuan'
     | '/tentang'
@@ -216,6 +240,8 @@ export interface RootRouteChildren {
   KeberlanjutanRoute: typeof KeberlanjutanRoute
   KebijakanPrivasiRoute: typeof KebijakanPrivasiRoute
   KontakRoute: typeof KontakRoute
+  LegalitasRoute: typeof LegalitasRoute
+  ManajemenRoute: typeof ManajemenRoute
   ProdukRoute: typeof ProdukRoute
   SyaratKetentuanRoute: typeof SyaratKetentuanRoute
   TentangRoute: typeof TentangRoute
@@ -283,6 +309,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KontakRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/legalitas': {
+      id: '/legalitas'
+      path: '/legalitas'
+      fullPath: '/legalitas'
+      preLoaderRoute: typeof LegalitasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manajemen': {
+      id: '/manajemen'
+      path: '/manajemen'
+      fullPath: '/manajemen'
+      preLoaderRoute: typeof ManajemenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/produk': {
       id: '/produk'
       path: '/produk'
@@ -344,6 +384,8 @@ const rootRouteChildren: RootRouteChildren = {
   KeberlanjutanRoute: KeberlanjutanRoute,
   KebijakanPrivasiRoute: KebijakanPrivasiRoute,
   KontakRoute: KontakRoute,
+  LegalitasRoute: LegalitasRoute,
+  ManajemenRoute: ManajemenRoute,
   ProdukRoute: ProdukRoute,
   SyaratKetentuanRoute: SyaratKetentuanRoute,
   TentangRoute: TentangRoute,

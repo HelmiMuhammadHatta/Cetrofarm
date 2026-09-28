@@ -34,7 +34,7 @@ export const businessLines: BusinessLine[] = [
     capacityNumber: 85,
     capacityUnit: "Ton/Bulan",
     source: "Data internal, Q2 2026",
-    image: "/assets/produk-bahan-pokok.webp"
+    image: "/assets/produk-sayuran-root.webp"
   },
   {
     id: "ubi-madu",
@@ -46,7 +46,7 @@ export const businessLines: BusinessLine[] = [
     capacityNumber: 40,
     capacityUnit: "Ton/Bulan",
     source: "Data internal, Q2 2026",
-    image: "/assets/produk-sayuran-segar.webp"
+    image: "/assets/produk-ubi-madu.webp"
   },
   {
     id: "daging-ayam",
@@ -70,6 +70,6 @@ export const businessLines: BusinessLine[] = [
     capacityNumber: 20,
     capacityUnit: "Ton/Bulan",
     source: "Data internal, Q2 2026",
-    image: "/assets/produk-bahan-pokok.webp"
+    image: "/assets/produk-bulk-ingredients.webp"
   }
 ];

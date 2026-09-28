@@ -3,6 +3,7 @@ import * as React from 'react'
 import { ShieldCheck, Menu, X, Globe } from 'lucide-react'
 import { FloatingWhatsApp } from '../components/FloatingWhatsApp'
 import { I18nProvider, useI18n } from '../context/i18n'
+import { CONTACT } from '../config/contact'
 
 import '../styles.css'
 
@@ -58,8 +59,8 @@ export const Route = createRootRoute({
             "logo": `${siteUrl}/assets/favicon.png`,
             "contactPoint": {
               "@type": "ContactPoint",
-              "telephone": "+62-85-8603-00-111",
-              "email": "customerrelation@cetrofarm.com",
+              "telephone": CONTACT.whatsapp.display,
+              "email": CONTACT.email,
               "contactType": "customer service"
             },
             "address": {
@@ -122,7 +123,14 @@ function Navbar() {
         
         {/* Navigasi Desktop */}
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-          <a href="/tentang" className="hover:text-wheat transition-colors">{t('nav.tentang')}</a>
+          <div className="relative group py-6 -my-6">
+            <a href="/tentang" className="hover:text-wheat transition-colors">{t('nav.tentang')}</a>
+            <div className="absolute top-full left-0 mt-0 w-48 bg-forest border border-cream/10 rounded-b shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col z-50 text-cream py-2">
+              <a href="/tentang" className="px-4 py-2 hover:bg-cream/10 transition-colors text-sm">Profil Perusahaan</a>
+              <a href="/manajemen" className="px-4 py-2 hover:bg-cream/10 transition-colors text-sm">Manajemen</a>
+              <a href="/legalitas" className="px-4 py-2 hover:bg-cream/10 transition-colors text-sm">Legalitas</a>
+            </div>
+          </div>
           <a href="/ekosistem" className="hover:text-wheat transition-colors">{t('nav.ekosistem')}</a>
           <a href="/produk" className="hover:text-wheat transition-colors">{t('nav.produk')}</a>
           <a href="/investor" className="hover:text-wheat transition-colors">{t('nav.investor')}</a>
@@ -134,13 +142,13 @@ function Navbar() {
           <a href="/kontak" className="hidden lg:inline-flex px-5 py-2.5 bg-cream text-forest rounded-sm hover:bg-wheat transition-all font-bold text-sm">
             Hubungi Kami
           </a>
-          <button 
+          {/* <button 
             onClick={() => setLanguage(language === 'id' ? 'en' : 'id')}
             className="flex items-center gap-1 px-2 py-1 rounded-sm border border-cream/30 hover:bg-cream/10 transition-colors"
           >
             <Globe size={16} />
             <span className="text-sm font-bold uppercase">{language}</span>
-          </button>
+          </button> */}
           {/* Tombol Toggle Menu Mobile */}
           <button 
             className="md:hidden p-2 text-cream hover:text-wheat transition-colors focus:outline-none"
@@ -156,7 +164,9 @@ function Navbar() {
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-20 left-0 w-full bg-forest border-t border-cream/10 shadow-lg z-40">
           <nav className="flex flex-col px-4 py-6 gap-2 text-base font-medium">
-            <a href="/tentang" className="hover:text-wheat transition-colors block py-3 border-b border-cream/10" onClick={() => setIsMobileMenuOpen(false)}>Tentang</a>
+            <a href="/tentang" className="hover:text-wheat transition-colors block py-3 border-b border-cream/10" onClick={() => setIsMobileMenuOpen(false)}>Tentang (Profil)</a>
+            <a href="/manajemen" className="hover:text-wheat transition-colors block py-3 border-b border-cream/10 pl-4 text-sm" onClick={() => setIsMobileMenuOpen(false)}>└ Manajemen</a>
+            <a href="/legalitas" className="hover:text-wheat transition-colors block py-3 border-b border-cream/10 pl-4 text-sm" onClick={() => setIsMobileMenuOpen(false)}>└ Legalitas</a>
             <a href="/ekosistem" className="hover:text-wheat transition-colors block py-3 border-b border-cream/10" onClick={() => setIsMobileMenuOpen(false)}>Ekosistem</a>
             <a href="/produk" className="hover:text-wheat transition-colors block py-3 border-b border-cream/10" onClick={() => setIsMobileMenuOpen(false)}>Produk</a>
             <a href="/investor" className="hover:text-wheat transition-colors block py-3 border-b border-cream/10" onClick={() => setIsMobileMenuOpen(false)}>Investor</a>
@@ -254,10 +264,10 @@ function Footer() {
         <div>
           <h3 className="font-serif text-xl mb-4 text-wheat">Kontak Kami</h3>
           <address className="not-italic text-cream/80 text-sm space-y-3">
-            <p>Jl. Setro Raya, Desa Gondoriyo,<br />Kec. Bergas, Kab. Semarang</p>
-            <p>(024) 6933 5138</p>
-            <p>+62 85 8603 00 111</p>
-            <p>customerrelation@cetrofarm.com</p>
+            <p>{CONTACT.address}</p>
+            <p>{CONTACT.officePhone.display}</p>
+            <p>{CONTACT.whatsapp.display}</p>
+            <p>{CONTACT.email}</p>
           </address>
         </div>
         <div>

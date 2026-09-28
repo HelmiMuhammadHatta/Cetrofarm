@@ -38,18 +38,27 @@ export const steps = [
 export const testimonials = [
   {
     quote: "Kualitas sayuran organik Cetrofarm sangat konsisten, memudahkan kami dalam menjaga standar restoran fine dining kami.",
-    author: "Budi Santoso",
-    role: "Executive Chef, Padma Hotel Semarang"
+    name: "Budi Santoso",
+    role: "Executive Chef",
+    company: "Padma Hotel Semarang",
+    photo: undefined, // TODO: tambahkan foto asli
+    verificationUrl: undefined
   },
   {
     quote: "Sebagai offtaker, kami merasa aman karena kepastian suplai beras selalu terpenuhi tepat waktu dengan kualitas Grade A.",
-    author: "Rina Melati",
-    role: "Supply Chain Manager, Super Indo Region Jateng"
+    name: "Rina Melati",
+    role: "Supply Chain Manager",
+    company: "Super Indo Region Jateng",
+    photo: undefined, // TODO: tambahkan foto asli
+    verificationUrl: undefined
   },
   {
     quote: "Berkat pendampingan Cetrofarm, hasil panen dan pendapatan keluarga saya meningkat signifikan. Kami juga belajar cara membuat pupuk organik mandiri.",
-    author: "H. Suryanto",
-    role: "Ketua Kelompok Tani Gondoriyo, Kab. Semarang"
+    name: "H. Suryanto",
+    role: "Ketua Kelompok Tani Gondoriyo",
+    company: "Kab. Semarang",
+    photo: undefined, // TODO: tambahkan foto asli
+    verificationUrl: undefined
   }
 ];
 

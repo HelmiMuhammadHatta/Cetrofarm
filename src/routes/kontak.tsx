@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
 import { MapPin, Phone, Mail, Building2, CheckCircle2 } from 'lucide-react'
 import { submitContact } from '../server/actions'
+import { CONTACT } from '../config/contact'
 
 export const Route = createFileRoute('/kontak')({
   component: KontakPage,
@@ -89,7 +90,7 @@ function KontakPage() {
                 <MapPin className="text-forest shrink-0 mt-1" size={22} />
                 <div>
                   <h3 className="font-bold text-forest">Kantor & Pusat Distribusi</h3>
-                  <p className="text-forest/70 text-xs mt-0.5 leading-relaxed">Dusun Setro, Desa Gondoriyo,<br/> Kec. Bergas, Kab. Semarang,<br/> Jawa Tengah, 50552</p>
+                  <p className="text-forest/70 text-xs mt-0.5 leading-relaxed">{CONTACT.address}</p>
                 </div>
               </div>
 
@@ -97,7 +98,7 @@ function KontakPage() {
                 <MapPin className="text-forest shrink-0 mt-1" size={22} />
                 <div>
                   <h3 className="font-bold text-forest">Kantor Perwakilan</h3>
-                  <p className="text-forest/70 text-xs mt-0.5">Deruzzi Space, Jl. Sukajadi No. 25, Bandung</p>
+                  <p className="text-forest/70 text-xs mt-0.5">{CONTACT.repOffice}</p>
                 </div>
               </div>
 
@@ -105,8 +106,8 @@ function KontakPage() {
                 <Phone className="text-forest shrink-0 mt-1" size={22} />
                 <div>
                   <h3 className="font-bold text-forest">Telepon & WhatsApp</h3>
-                  <p className="text-forest/70 text-xs mt-0.5">Office: (024) 6933 5138</p>
-                  <p className="text-forest/70 text-xs">WhatsApp: +62 85 8603 00 111</p>
+                  <p className="text-forest/70 text-xs mt-0.5">Office: {CONTACT.officePhone.display}</p>
+                  <p className="text-forest/70 text-xs">WhatsApp: {CONTACT.whatsapp.display}</p>
                 </div>
               </div>
 
@@ -114,7 +115,7 @@ function KontakPage() {
                 <Mail className="text-forest shrink-0 mt-1" size={22} />
                 <div>
                   <h3 className="font-bold text-forest">Email Resmi</h3>
-                  <p className="text-forest/70 text-xs mt-0.5">customerrelation@cetrofarm.com</p>
+                  <p className="text-forest/70 text-xs mt-0.5">{CONTACT.email}</p>
                 </div>
               </div>
             </div>

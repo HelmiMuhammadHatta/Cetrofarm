@@ -9,6 +9,14 @@ const data = [
 ];
 
 export function TractionChart() {
+  if (!data || data.length === 0) {
+    return (
+      <div className="w-full h-80 bg-white p-6 rounded-sm shadow-xl border border-forest/10 flex items-center justify-center text-forest/50 text-sm">
+        Data belum tersedia
+      </div>
+    );
+  }
+
   return (
     <div className="w-full h-80 bg-white p-6 rounded-sm shadow-xl border border-forest/10">
       <div className="mb-6">
@@ -27,8 +35,8 @@ export function TractionChart() {
               <stop offset="95%" stopColor="#C9A227" stopOpacity={0}/>
             </linearGradient>
           </defs>
-          <XAxis dataKey="quarter" stroke="#173D2B" opacity={0.5} fontSize={12} />
-          <YAxis stroke="#173D2B" opacity={0.5} fontSize={12} />
+          <XAxis dataKey="quarter" stroke="#173D2B" opacity={0.5} fontSize={12} tickMargin={10} />
+          <YAxis stroke="#173D2B" opacity={0.5} fontSize={12} width={35} tickFormatter={(value) => value} />
           <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.2} />
           <Tooltip 
             contentStyle={{ backgroundColor: '#FAF7F0', border: 'none', borderRadius: '4px', color: '#173D2B' }} 

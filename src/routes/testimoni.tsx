@@ -29,12 +29,22 @@ function TestimoniPage() {
               <Quote className="text-forest/10 absolute top-6 right-6" size={48} />
               <p className="text-forest/80 italic text-lg leading-relaxed mb-8 flex-grow">"{testimoni.quote}"</p>
               <div className="flex items-center gap-4 mt-auto">
-                <div className="w-12 h-12 bg-wheat rounded-full flex items-center justify-center font-serif font-bold text-forest text-xl shrink-0">
-                  {testimoni.name.charAt(0)}
-                </div>
+                {testimoni.photo ? (
+                  <img src={testimoni.photo} alt={testimoni.name} className="w-12 h-12 rounded-full object-cover shrink-0" />
+                ) : (
+                  <div className="w-12 h-12 bg-wheat rounded-full flex items-center justify-center font-serif font-bold text-forest text-xl shrink-0">
+                    {testimoni.name.charAt(0)}
+                  </div>
+                )}
                 <div>
-                  <h4 className="font-bold text-forest">{testimoni.name}</h4>
-                  <p className="text-sm text-forest/70">{testimoni.role}</p>
+                  <h4 className="font-bold text-forest">
+                    {testimoni.verificationUrl ? (
+                      <a href={testimoni.verificationUrl} target="_blank" rel="noreferrer" className="hover:underline">{testimoni.name}</a>
+                    ) : (
+                      testimoni.name
+                    )}
+                  </h4>
+                  <p className="text-sm text-forest/70">{testimoni.role}, {testimoni.company}</p>
                 </div>
               </div>
             </div>

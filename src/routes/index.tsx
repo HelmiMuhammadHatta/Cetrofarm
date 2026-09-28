@@ -2,7 +2,8 @@ import { createFileRoute } from '@tanstack/react-router'
 import { ArrowRight, Leaf, ShieldCheck, Users, MoveRight, Download, PhoneCall, CheckCircle } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { metrics, valueProps, steps, testimonials, articles } from '../data/content'
-import { businessLines, companyData } from '../data/company'
+import { businessLines } from '../data/company'
+import { CONTACT } from '../config/contact'
 import { TractionChart } from '../components/TractionChart'
 import { NewsletterForm } from '../components/NewsletterForm'
 import { CountUp } from '../components/CountUp'
@@ -18,44 +19,47 @@ declare global {
 
 export const Route = createFileRoute('/')({
   component: Homepage,
-  head: () => ({
-    meta: [
-      { title: 'Cetrofarm | Ekosistem Agrikultur Terintegrasi' },
-      { name: 'description', content: 'Cetrofarm adalah business aggregator agrikultur terintegrasi hulu-hilir di Jawa Tengah. Menyuplai sayuran segar, ubi madu, dan protein hewani berkualitas.' },
-      { property: 'og:title', content: 'Cetrofarm | Ekosistem Agrikultur Terintegrasi' },
-      { property: 'og:description', content: 'Cetrofarm merawat rantai pasok pangan dari 210+ petani binaan langsung ke pasar B2B.' },
-      { property: 'og:image', content: 'https://cetrofarm.vercel.app/assets/hero-panen-golden-hour.webp' }
-    ],
-    scripts: [
-      {
-        type: 'application/ld+json',
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          "name": "Cetrofarm",
-          "legalName": "PT. Cetro Tama Indonesia",
-          "url": "https://cetrofarm.vercel.app",
-          "logo": "https://cetrofarm.vercel.app/assets/1706845304_Logo Cetrofarm_Hijau.png",
-          "foundingDate": "2018",
-          "identifier": "NIB 9120212080575",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Jl. Setro Raya, Desa Gondoriyo, Kec. Bergas",
-            "addressLocality": "Semarang",
-            "addressRegion": "Jawa Tengah",
-            "postalCode": "50552",
-            "addressCountry": "ID"
-          },
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+62-85-8603-00-111",
-            "contactType": "Customer Relations",
-            "email": "customerrelation@cetrofarm.com"
-          }
-        })
-      }
-    ]
-  })
+  head: () => {
+    const siteUrl = import.meta.env.VITE_SITE_URL || 'https://cetrofarm.com';
+    return {
+      meta: [
+        { title: 'Cetrofarm | Ekosistem Agrikultur Terintegrasi' },
+        { name: 'description', content: 'Cetrofarm adalah business aggregator agrikultur terintegrasi hulu-hilir di Jawa Tengah. Menyuplai sayuran segar, ubi madu, dan protein hewani berkualitas.' },
+        { property: 'og:title', content: 'Cetrofarm | Ekosistem Agrikultur Terintegrasi' },
+        { property: 'og:description', content: 'Cetrofarm merawat rantai pasok pangan dari 210+ petani binaan langsung ke pasar B2B.' },
+        { property: 'og:image', content: `${siteUrl}/assets/hero-panen-golden-hour.webp` }
+      ],
+      scripts: [
+        {
+          type: 'application/ld+json',
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Cetrofarm",
+            "legalName": "PT. Cetro Tama Indonesia",
+            "url": siteUrl,
+            "logo": `${siteUrl}/assets/1706845304_Logo Cetrofarm_Hijau.png`,
+            "foundingDate": "2018",
+            "identifier": "NIB 9120212080575",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Jl. Setro Raya, Desa Gondoriyo, Kec. Bergas",
+              "addressLocality": "Semarang",
+              "addressRegion": "Jawa Tengah",
+              "postalCode": "50552",
+              "addressCountry": "ID"
+            },
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": "+62-85-8603-00-111",
+              "contactType": "Customer Relations",
+              "email": "customerrelation@cetrofarm.com"
+            }
+          })
+        }
+      ]
+    };
+  }
 })
 
 const fadeUpVariant = {
@@ -137,7 +141,7 @@ function Homepage() {
               </div>
               <div>
                 <p className="text-3xl md:text-4xl font-serif font-bold text-wheat">
-                  <CountUp end={5} suffix=" lini" />
+                  <CountUp end={businessLines.length} suffix=" lini" />
                 </p>
                 <p className="text-xs text-cream/90 font-bold uppercase tracking-wider mt-1 mb-0.5">Lini Bisnis</p>
                 <p className="text-[10px] text-cream/60 italic">{metrics.productLinesSource}</p>
@@ -248,7 +252,7 @@ function Homepage() {
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
             <div>
               <span className="text-xs font-bold text-forest uppercase tracking-widest block mb-1">Portofolio Komoditas</span>
-              <h2 className="text-3xl md:text-4xl font-serif font-bold text-forest">5 Lini Bisnis Utama</h2>
+              <h2 className="text-3xl md:text-4xl font-serif font-bold text-forest">{businessLines.length} Lini Bisnis Utama</h2>
             </div>
             <a href="/produk" className="inline-flex items-center gap-2 text-forest font-bold hover:text-forest/80 transition-colors text-sm">
               Lihat Katalog Lengkap <ArrowRight size={16} />
@@ -265,7 +269,10 @@ function Homepage() {
                     loading="lazy" 
                     width={400}
                     height={250}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = '/assets/placeholder-product.webp';
+                    }}
                   />
                   <div className="absolute top-3 left-3">
                     <span className="bg-forest text-cream px-2.5 py-1 rounded text-xs font-bold">{p.status}</span>
@@ -279,7 +286,7 @@ function Homepage() {
                   <div className="pt-4 border-t border-forest/10 flex justify-between items-center text-xs font-bold">
                     <a href={`/produk#${p.id}`} className="text-forest hover:underline">Detail Lini</a>
                     <a 
-                      href={`https://wa.me/${companyData.contact.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Halo Cetrofarm, saya tertarik meminta penawaran B2B untuk ${p.title}.`)}`} 
+                      href={`https://wa.me/${CONTACT.whatsapp.number}?text=${encodeURIComponent(`Halo Cetrofarm, saya tertarik meminta penawaran B2B untuk ${p.title}.`)}`} 
                       target="_blank" 
                       rel="noreferrer"
                       className="px-3 py-1.5 bg-forest text-cream rounded hover:bg-forest/90 transition-colors"
@@ -320,7 +327,6 @@ function Homepage() {
           </div>
           <div className="lg:w-1/2 w-full">
             <div className="bg-white/5 p-6 rounded-sm border border-cream/10">
-              <h3 className="text-lg font-bold text-wheat mb-4">Pertumbuhan Volume Panen (Ton/Bulan)</h3>
               <TractionChart />
             </div>
           </div>

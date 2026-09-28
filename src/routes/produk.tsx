@@ -1,7 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { motion } from 'framer-motion'
 import { Search, PackageCheck, Truck, ShieldCheck, ArrowRight, PhoneCall } from 'lucide-react'
-import { businessLines, certifications, companyData } from '../data/company'
+import { businessLines } from '../data/company'
+import { certifications } from '../data/credentials'
+import { CONTACT } from '../config/contact'
 import { CertificationCard } from '../components/CertificationCard'
 
 export const Route = createFileRoute('/produk')({
@@ -61,6 +63,9 @@ function ProdukPage() {
                   width={600}
                   height={400}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/assets/placeholder-product.webp';
+                  }}
                 />
                 <div className="absolute top-3 left-3 flex gap-2">
                   <span className={`px-2.5 py-1 rounded-sm text-xs font-bold ${line.status === 'Berjalan' ? 'bg-forest text-cream' : 'bg-wheat text-forest'}`}>
@@ -81,7 +86,7 @@ function ProdukPage() {
                 <div className="pt-4 border-t border-forest/10 flex flex-col gap-2">
                   <span className="text-[10px] text-forest/50 italic">{line.source}</span>
                   <a 
-                    href={`https://wa.me/${companyData.contact.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Halo Cetrofarm, saya ingin meminta penawaran B2B untuk lini produk: ${line.title}`)}`}
+                    href={`https://wa.me/${CONTACT.whatsapp.number}?text=${encodeURIComponent(`Halo Cetrofarm, saya ingin meminta penawaran B2B untuk lini produk: ${line.title}`)}`}
                     target="_blank" 
                     rel="noreferrer"
                     className="inline-flex items-center justify-center gap-2 py-2.5 bg-forest text-cream font-bold rounded-sm text-xs hover:bg-forest/90 transition-colors"

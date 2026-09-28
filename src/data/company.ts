@@ -7,19 +7,7 @@ export const companyData = {
   brandName: "Cetrofarm",
   established: 2018,
   nib: "9120212080575",
-  description: "Ekosistem Agrikultur Terintegrasi",
-  contact: {
-    mainOffice: {
-      address: "Jl. Setro Raya, Desa Gondoriyo, Kec. Bergas, Kab. Semarang",
-      phone: "024 6933 5138",
-    },
-    repOffice: {
-      name: "Deruzzi Space",
-      address: "Jl. Sukajadi No. 25, Bandung"
-    },
-    whatsapp: "+62 85 8603 00 111",
-    email: "customerrelation@cetrofarm.com"
-  }
+  description: "Ekosistem Agrikultur Terintegrasi"
 };
 
 export const target2030 = {
